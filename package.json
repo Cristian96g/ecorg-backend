@@ -7,7 +7,11 @@
   "scripts": {
     "dev": "nodemon src/index.js",
     "start": "node src/index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "seed": "node scripts/seedDemo.js",
+    "seed:reset": "node scripts/seedDemo.js --reset",
+    "seed:admin": "node scripts/seedAdmin.js",
+    "seed:admin:once": "node scripts/seedAdmin.js"
   },
   "keywords": [],
   "author": "",
@@ -22,6 +26,7 @@
     "express": "^5.1.0",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.19.2",
-    "morgan": "^1.10.1"
+    "morgan": "^1.10.1",
+    "multer": "^2.0.2"
   }
 }

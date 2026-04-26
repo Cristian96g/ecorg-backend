@@ -1,16 +1,30 @@
 import mongoose from "mongoose";
 
+const MATERIAL_TYPES = ["plastico", "vidrio", "papel", "pilas", "aceite"];
+const MATERIAL_ALIASES = {
+  papel_carton: "papel",
+};
+
 const pointSchema = new mongoose.Schema(
   {
-    title: String,
-    barrio: String,
-    types: [String], // ["plastico","vidrio",...]
-    estado: { type: String, enum: ["activo","inactivo"], default: "activo" },
-    address: String,
+    title: { type: String, required: true, trim: true },
+    barrio: { type: String, trim: true },
+    types: [
+      {
+        type: String,
+        enum: MATERIAL_TYPES,
+      },
+    ],
+    estado: {
+      type: String,
+      enum: ["activo", "inactivo"],
+      default: "activo",
+    },
+    address: { type: String, required: true, trim: true },
     location: {
       type: { type: String, enum: ["Point"], default: "Point" },
-      coordinates: { type: [Number], required: true } // [lng, lat]
-    }
+      coordinates: { type: [Number], required: true }, // [lng, lat]
+    },
   },
   { timestamps: true }
 );
@@ -18,3 +32,4 @@ const pointSchema = new mongoose.Schema(
 pointSchema.index({ location: "2dsphere" });
 
 export default mongoose.model("Point", pointSchema);
+export { MATERIAL_TYPES, MATERIAL_ALIASES };
